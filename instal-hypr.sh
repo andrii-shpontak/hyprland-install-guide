@@ -1,5 +1,5 @@
 # Install all require packages
-sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono fish pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson
+sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono fish pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson hyprpicker
 
 
 # Install YAY packages
