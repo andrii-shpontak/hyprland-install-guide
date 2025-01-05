@@ -44,8 +44,28 @@ cd Graphite-gtk-theme
 ./install.sh
 
 # Meson
-git clone https://github.com/ArtsyMacav/wlogout.git
+git clone https://github.com/ArtsyMacaw/wlogout.git
 cd wlogout/
 meson build
 ninja -C build
 sudo ninja -C build install
+
+
+# NVIDIA
+sudo pacman -S egl-wayland nvidia-settings lib32-nvidia-utils glxinfo mesa-demos libva-nvidia-driver
+
+sudo nano /boot/loader/entries/arch.conf
+> options nvidia-drm.modeset=1
+#---
+sudo vim /etc/modprobe.d/nvidia.conf
+> options nvidia_drm modeset=1 fbdev=1
+#---
+sudo vim /etc/mkinitcpio.conf
+> MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+#---
+sudo vim /etc/modprobe.d/nvidia.conf
+> options nvidia_drm modeset=1 fbdev=1
+
+#---
+sudo mkinitcpio -P
+
