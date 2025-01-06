@@ -1,12 +1,12 @@
-@import "macchiato.css";
+@import 'macchiato.css';
 
 * {
-  font-family: "JetBrains Mono", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'JetBrains Mono', Roboto, Helvetica, Arial, sans-serif;
   font-size: 18px;
 }
 
 window#waybar {
-  background-color: @base;
+  background-color: transparent;
   border-radius: 13px;
   transition-property: background-color;
   transition-duration: 0.5s;
@@ -56,13 +56,12 @@ button:hover {
   box-shadow: inset 0 -3px #ffffff;
 }
 
-#clock,
 #battery,
 #cpu,
 #memory,
 #temperature,
-#network,
-#pulseaudio {
+#pulseaudio,
+language {
   padding: 0 10px;
 }
 
@@ -98,10 +97,14 @@ button:hover {
   color: @text;
 }
 
+#language {
+  color: @flamingo;
+}
+
 .modules-right,
 .modules-left,
 .modules-center {
-  background-color: @base;
+  /* background-color: @base; */
   border-radius: 15px;
 }
 .modules-right {

@@ -1,5 +1,5 @@
 # Install all require packages
-sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono fish pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson hyprpicker pavucontrol
+sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson hyprpicker pavucontrol zsh zsh-completions
 
 
 
@@ -27,8 +27,6 @@ mkpkg -si
 
 # download configs
 git clone https://github.com/Aptivace/hyprland-config
-cp ~/hyprland-config/kitty/kitty.conf ~/.config/kitty/
-cp -r ~/hyprland-config/waybar/ ~/.config/
 cp -r ~/hyprland-config/wofi/ ~/.config/
 cp -r ~/hyprland-config/fastfetch/ ~/.config/
 cp -r ~/hyprland-config/hypr/hyprpaper.conf ~/.config/hypr/
@@ -52,7 +50,7 @@ sudo ninja -C build install
 
 
 # NVIDIA
-sudo pacman -S egl-wayland nvidia-settings lib32-nvidia-utils glxinfo mesa-demos libva-nvidia-driver
+sudo pacman -S egl-wayland nvidia-settings lib32-nvidia-utils glxinfo mesa-demos libva-nvidia-driver gvfs gvfs-mtp gvfs-smb
 
 sudo nano /boot/loader/entries/arch.conf
 > options nvidia-drm.modeset=1
@@ -63,9 +61,10 @@ sudo vim /etc/modprobe.d/nvidia.conf
 sudo vim /etc/mkinitcpio.conf
 > MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 #---
-sudo vim /etc/modprobe.d/nvidia.conf
-> options nvidia_drm modeset=1 fbdev=1
-
-#---
 sudo mkinitcpio -P
+
+# For disks
+sudo usermod -aG storage $USER
+sudo pacman -S udisks2
+sudo usermod -aG wheel,storage $USER
 

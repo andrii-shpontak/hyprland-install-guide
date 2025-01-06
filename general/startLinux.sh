@@ -70,6 +70,6 @@ git config --global user.name "andriy-shpontak" && git config --global user.emai
 
 # NGINX
 # copy nginx.conf to /etc/nginx/nginx.conf
-# copy letsencrypt directory
+# generate certeficates:
 # sudo certbot --nginx -d dev-home-777.tplinkdns.com
 
