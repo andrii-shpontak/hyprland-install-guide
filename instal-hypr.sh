@@ -1,6 +1,5 @@
 # Install all require packages
-sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson hyprpicker pavucontrol zsh zsh-completions
-
+sudo pacman -S hyprpaper waybar ttf-font-awesome otf-font-awesome ttf-jetbrains-mono pkgfile ttf-dejavu powerline-fonts inetutils nwg-look papirus-icon-theme fastfetch thunar meson hyprpicker pavucontrol zsh zsh-completions xdg-desktop-portal-hyprland xdg-desktop-portal-gtk eza fzf
 
 
 # Install YAY packages
@@ -68,3 +67,12 @@ sudo usermod -aG storage $USER
 sudo pacman -S udisks2
 sudo usermod -aG wheel,storage $USER
 
+
+# Wallpapers repo
+https://github.com/JaKooLit/Wallpaper-Bank 
+
+# Wull guide Hyprland
+git clone https://github.com/JaKooLit/Arch-Hyprland.git                              ─╯
+
+# Dotfiles
+git cloen https://github.com/JaKooLit/Hyprland-Dots
