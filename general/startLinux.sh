@@ -1,18 +1,15 @@
-sudo pacman -S git ttf-firacode-nerd filezilla zsh zsh-completions neofetch spectacle gwenview qbittorrent dosfstools nginx certbot certbot-nginx
+sudo pacman -S git ttf-firacode-nerd filezilla zsh zsh-completions neofetch spectacle gwenview qbittorrent dosfstools nginx docker docker-compose bluez bluez-utils linux-firmware bluedevil obs-studio
 
 git clone https://aur.archlinux.org/yay.git
 
 chmod 777 yay && cd yay && makepkg -s
 
 # Bluetooth
-sudo pacman -S bluez bluez-utils linux-firmware bluedevil
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 
 
-#sudo pacman -U yay...
-
-yay -S google-chrome slack-desktop telegram-desktop-bin skypeforlinux-bin visual-studio-code-bin simplescreenrecorder spotify-adblock
+yay -S google-chrome slack-desktop telegram-desktop-bin  visual-studio-code-bin spotify-adblock
 
 # end of instalation
 sudo chsh -s /bin/zsh
@@ -38,19 +35,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # install needed versions
-
-nvm install 14.17.6
-nvm install 18.19.1
-nvm install 22.11.0
+nvm install 22
 
 # Docker
-sudo pacman -S docker
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
 
 # For Ngrok
 # in file
@@ -61,15 +51,32 @@ sudo nano /etc/hosts
 # after put in system you`r .ssh folder past this command to terminal
 # chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
 
-# wallpapers
-# https://wallhaven.cc/w/d5xwem
-# https://wallhaven.cc/w/zmrqgj
-
 # for git
 git config --global user.name "andriy-shpontak" && git config --global user.email "andriishpontak@gmail.com" && git config --global core.editor "nano"
+
+
 
 # NGINX
 # copy nginx.conf to /etc/nginx/nginx.conf
 # generate certeficates:
-# sudo certbot --nginx -d dev-home-777.tplinkdns.com
 
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout /etc/ssl/private/selfsigned.key \
+  -out /etc/ssl/certs/selfsigned.crt \
+  -subj "/CN=dev-home-777.tplinkdns.com"
+
+
+
+# USB prevent cache
+
+sudo nano /etc/udev/rules.d/99-usb-sync-mount.rules
+# type in 
+ENV{ID_BUS}=="usb", ENV{ID_FS_TYPE}!="", ENV{UDISKS_IGNORE}!="1", ENV{UDISKS_MOUNT_OPTIONS_DEFAULTS}="sync"
+
+sudo nano /etc/udev/rules.d/60-usb-storage-no-cache.rules
+# type in
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_BUS}=="usb", ATTR{bdi/writeback}="0"
+# then run
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+reboot
