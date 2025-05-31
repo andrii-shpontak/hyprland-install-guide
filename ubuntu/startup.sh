@@ -5,7 +5,7 @@ sudo apt update
 sudo apt full-upgrade -y
 
 # Install essential packages
-sudo apt install -y git curl neofetch obs-studio gnome-software-plugin-flatpak gnome-software flameshot nginx zsh
+sudo apt install -y git curl neofetch obs-studio gnome-software-plugin-flatpak gnome-software flameshot nginx zsh build-essential
 
 # Install Docker
 curl -fsSL https://get.docker.com | sudo bash
@@ -79,5 +79,21 @@ export NVM_DIR="\$HOME/.nvm"
 source "\$NVM_DIR/nvm.sh"
 nvm install 22
 npm install -g yarn@1
+
+# Spotify Adblock
+git clone https://github.com/abba23/spotify-adblock.git
+cd spotify-adblock
+make
+sudo make install
+cd ..
+if ! grep -q 'alias spotify=' ~/.zshrc; then
+  echo 'alias spotify="LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"' >> ~/.zshrc
+fi
+
+# Spotify official repo keys and install
+curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update
+sudo apt-get install -y spotify-client
 
 echo "✅ Setup complete. Please reboot or log out and back in to apply all changes (Docker group, zsh shell, etc.)."
