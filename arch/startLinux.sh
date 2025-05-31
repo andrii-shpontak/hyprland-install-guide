@@ -52,7 +52,9 @@ sudo nano /etc/hosts
 # chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
 
 # for git
-git config --global user.name "andriy-shpontak" && git config --global user.email "andriishpontak@gmail.com" && git config --global core.editor "nano"
+# git config --global user.name "andriy-shpontak" && git config --global user.email "andriishpontak@gmail.com" && git config --global core.editor "nano"
+
+git config --global user.name "a-shpontak" && git config --global user.email "andrii.shpontak@cowchain.io" && git config --global core.editor "nano"
 
 
 
